@@ -107,7 +107,7 @@ public class AddComponent extends javax.swing.JFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
-        jButton2.setText("ADD");
+        jButton2.setText("EDIT");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -115,7 +115,7 @@ public class AddComponent extends javax.swing.JFrame {
         });
 
         jButton3.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
-        jButton3.setText("EDIT");
+        jButton3.setText("REMOVE");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -123,7 +123,7 @@ public class AddComponent extends javax.swing.JFrame {
         });
 
         jButton4.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
-        jButton4.setText("REMOVE");
+        jButton4.setText("ADD");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
