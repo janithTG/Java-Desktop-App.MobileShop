@@ -1,4 +1,5 @@
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /*
@@ -74,6 +75,11 @@ public class Register extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Emoji", 1, 20)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -83,6 +89,11 @@ public class Register extends javax.swing.JFrame {
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField2KeyPressed(evt);
             }
         });
 
@@ -101,10 +112,20 @@ public class Register extends javax.swing.JFrame {
                 jTextField3ActionPerformed(evt);
             }
         });
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField3KeyPressed(evt);
+            }
+        });
 
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
+            }
+        });
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField4KeyPressed(evt);
             }
         });
 
@@ -116,6 +137,11 @@ public class Register extends javax.swing.JFrame {
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
+            }
+        });
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField5KeyPressed(evt);
             }
         });
 
@@ -132,6 +158,11 @@ public class Register extends javax.swing.JFrame {
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
+            }
+        });
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyPressed(evt);
             }
         });
 
@@ -364,6 +395,139 @@ public class Register extends javax.swing.JFrame {
     private void jPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField2ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+        char username = evt.getKeyChar();
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER && !(jTextField1.getText().isEmpty())){
+            jTextField2.grabFocus();
+        }
+        else if(evt.getKeyCode() == KeyEvent.VK_ENTER && (jTextField1.getText().isEmpty())){
+            JOptionPane.showMessageDialog(this,"Please Enter Username","Error",JOptionPane.ERROR_MESSAGE);
+            jTextField1.grabFocus();
+        }
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
+        // TODO add your handling code here:
+        char fullname = evt.getKeyChar();
+        if(Character.isLetter(fullname)|| evt.getKeyCode()==KeyEvent.VK_SPACE ||evt.getKeyCode()==KeyEvent.VK_SHIFT ||evt.getKeyCode()==KeyEvent.VK_BACK_SPACE ||evt.getKeyCode()==KeyEvent.VK_ENTER ||evt.getKeyCode()==KeyEvent.VK_CAPS_LOCK){
+            jTextField2.setEditable(true);
+            if(!(jTextField2.getText().isEmpty()) && evt.getKeyCode()==KeyEvent.VK_ENTER ){
+                jTextField3.setText(null);
+                jTextField3.grabFocus();
+            }
+            else if(evt.getKeyCode() == KeyEvent.VK_ENTER && (jTextField2.getText().isEmpty())){
+            JOptionPane.showMessageDialog(this,"Please Enter Fullname","Error",JOptionPane.ERROR_MESSAGE);
+            jTextField2.setText(null);
+            jTextField2.grabFocus();
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Invalid Input","Error",JOptionPane.ERROR_MESSAGE);
+            jTextField2.setText(null);
+            jTextField2.grabFocus();
+            
+        }
+    }//GEN-LAST:event_jTextField2KeyPressed
+
+    private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
+        // TODO add your handling code here:
+        String telRegex = "^(?:7|0|(?:\\+94))[0-9]{9,10}$";
+        char contact = evt.getKeyChar();
+        if(Character.isDigit(contact)||evt.getKeyCode()==KeyEvent.VK_ENTER||evt.getKeyCode()==KeyEvent.VK_LEFT || evt.getKeyCode()==KeyEvent.VK_RIGHT || evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
+            jTextField3.setEditable(true);
+            if(jTextField3.getText().trim().matches(telRegex) && evt.getKeyCode() == KeyEvent.VK_ENTER){
+                jTextField4.setText(null);
+                jTextField4.grabFocus();
+            }
+            else if(!(jTextField3.getText().trim().matches(telRegex))&& evt.getKeyCode() == KeyEvent.VK_ENTER){
+                JOptionPane.showMessageDialog(this,"Invalid Phone Number","Error",JOptionPane.ERROR_MESSAGE);
+                jTextField3.setText(null);
+                jTextField3.grabFocus();   
+            }
+            
+        }
+        else if(Character.isLetter(contact)|| evt.getKeyCode()== KeyEvent.VK_SPACE){
+            JOptionPane.showMessageDialog(this,"Invalid Input","Error",JOptionPane.ERROR_MESSAGE);
+            jTextField3.setText(null);
+            jTextField3.grabFocus(); 
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Invalid Input","Error",JOptionPane.ERROR_MESSAGE);
+            jTextField3.setText(null);
+            jTextField3.grabFocus(); 
+        }
+        
+    }//GEN-LAST:event_jTextField3KeyPressed
+
+    private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER && !(jTextField4.getText().isEmpty())){
+            jTextField5.grabFocus();
+        }
+        else if(evt.getKeyCode() == KeyEvent.VK_ENTER && (jTextField1.getText().isEmpty())){
+            JOptionPane.showMessageDialog(this,"Please Enter Address","Error",JOptionPane.ERROR_MESSAGE);
+            jTextField4.setText(null);
+            jTextField4.grabFocus();
+        }
+    }//GEN-LAST:event_jTextField4KeyPressed
+
+    private void jTextField5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyPressed
+        // TODO add your handling code here:
+        String dob_regex = "^(?:0[1-9]|[12]\\d|3[01])([\\/.-])(?:0[1-9]|1[012])\\1(?:19|20)\\d\\d$"; // can validate upto 1900 to 2099 with the format of dd/mm/yyyy
+        char dob = evt.getKeyChar();
+        if(Character.isDigit(dob)||evt.getKeyCode()==KeyEvent.VK_ENTER||evt.getKeyCode()==KeyEvent.VK_LEFT || evt.getKeyCode()==KeyEvent.VK_RIGHT || evt.getKeyCode()==KeyEvent.VK_BACK_SLASH || evt.getKeyCode()==KeyEvent.VK_SLASH || evt.getKeyCode()==KeyEvent.VK_DECIMAL || evt.getKeyCode()==KeyEvent.VK_SUBTRACT || evt.getKeyCode()==KeyEvent.VK_BACK_SPACE || evt.getKeyCode()==KeyEvent.VK_PERIOD || evt.getKeyCode()==KeyEvent.VK_MINUS){
+            jTextField5.setEditable(true);
+            if(jTextField5.getText().trim().matches(dob_regex) && evt.getKeyCode() == KeyEvent.VK_ENTER){
+                jPasswordField1.setText(null);
+                jPasswordField1.grabFocus();
+            }
+            else if(!(jTextField5.getText().trim().matches(dob_regex))&& evt.getKeyCode() == KeyEvent.VK_ENTER){
+                JOptionPane.showMessageDialog(this,"Invalid Birth Date","Error",JOptionPane.ERROR_MESSAGE);
+                jTextField5.setText(null);
+                jTextField5.grabFocus();   
+            }
+        }
+        else if(Character.isLetter(dob)|| evt.getKeyCode()== KeyEvent.VK_SPACE){
+            JOptionPane.showMessageDialog(this,"Invalid Input","Error",JOptionPane.ERROR_MESSAGE);
+            jTextField5.setText(null);
+            jTextField5.grabFocus(); 
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Invalid Input","Error",JOptionPane.ERROR_MESSAGE);
+            jTextField5.setText(null);
+            jTextField5.grabFocus(); 
+        }
+    }//GEN-LAST:event_jTextField5KeyPressed
+
+    private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
+        // TODO add your handling code here:
+        //cus refers to customer and dis refers to distributor and serial keys are hardcoded
+        String cus = "C1";
+        String dis = "D1";
+        if( evt.getKeyCode()== KeyEvent.VK_ENTER){
+            if((jPasswordField1.getText().equals(cus) || jPasswordField1.getText().equals(dis))){
+                jPasswordField2.setText(null);
+                jPasswordField2.grabFocus();
+            }
+            else if(jPasswordField1.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this,"Serial Key Can not Empty","Error",JOptionPane.ERROR_MESSAGE);
+                jPasswordField1.setText(null);
+                jPasswordField1.grabFocus();
+        
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"Invalid Serial Key","Error",JOptionPane.ERROR_MESSAGE);
+                jPasswordField1.setText(null);
+                jPasswordField1.grabFocus();
+            }
+        }
+        
+        
+        
+      
+    }//GEN-LAST:event_jPasswordField1KeyPressed
 
     /**
      * @param args the command line arguments
