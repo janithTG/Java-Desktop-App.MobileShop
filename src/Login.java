@@ -1,3 +1,7 @@
+
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -165,10 +169,58 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try {
+            String user = jTextField1.getText();
+            String pw = jPasswordField1.getText();
+            if(!user.isEmpty()||!pw.isEmpty()){
+            ResultSet results = DatabaseConnection.search("SELECT `id`,`serialKey`,`password` FROM user WHERE `username` ='"+user+"'");
+            if (results.next()){
+                // if block will work only if there exist the user in the database
+                String id = results.getString("id");
+                String serial = results.getString("serialKey");
+                String pass = results.getString("password");
+                if(pw.equals(pass)){
+                    if(serial.equals("C1")){
+                        AddComponent add = new AddComponent();
+                        this.dispose();
+                        add.setVisible(true);
+                    }
+                    else{
+                        Sales sales = new Sales();
+                        this.dispose();
+                        sales.setVisible(true);
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(this,"Incorrect Password!, Try Again.","ERROR",JOptionPane.ERROR_MESSAGE);
+                    jPasswordField1.setText(null);
+                    jPasswordField1.grabFocus();
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"Incorrect Username!, Try Again.","ERROR",JOptionPane.ERROR_MESSAGE);
+                jTextField1.setText(null);
+                jTextField1.grabFocus();
+                jPasswordField1.setText(null);
+                jPasswordField1.grabFocus();
+            }
+        } else{
+                JOptionPane.showMessageDialog(this,"Fields Can not be empty!","ERROR",JOptionPane.ERROR_MESSAGE);
+                jTextField1.setText(null);
+                jTextField1.grabFocus();
+            }
+           
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        Register reg = new Register();
+        reg.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

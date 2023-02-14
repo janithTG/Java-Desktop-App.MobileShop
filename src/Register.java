@@ -333,12 +333,12 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             String un = jTextField1.getText();
-        String fullN = jTextField2.getText();
-        String contact = jTextField3.getText();
-        String address = jTextField4.getText();
-        String dob = jTextField5.getText();
-        String serial = jPasswordField1.getText();
-        String pass = jPasswordField2.getText();
+            String fullN = jTextField2.getText();
+            String contact = jTextField3.getText();
+            String address = jTextField4.getText();
+            String dob = jTextField5.getText();
+            String serial = jPasswordField1.getText();
+            String pass = jPasswordField2.getText();
         
         if(un.isEmpty()){
             JOptionPane.showMessageDialog(this, "Please Enter Your Username!","ERROR",JOptionPane.ERROR_MESSAGE);
@@ -370,18 +370,21 @@ public class Register extends javax.swing.JFrame {
             jPasswordField2.setText(null);
             jPasswordField2.grabFocus();
         }
-//        else{
-//            DatabaseConnection.iud("INSERT INTO user(`username`,`full_name`,`contact_no`,`address`,`dob`,`serialKey`,`password`) VALUES ('"+un+"','"+fullN+"','"+contact+"','"+address+"','"+dob+"','"+serial+"','"+pass+"')");
-//            JOptionPane.showMessageDialog(this,"New User Regidtered Successfully","DONE",JOptionPane.INFORMATION_MESSAGE);
-//            //in here assigned C1 as the customer serial key and assigned D1 as the distributor serial key
-//            if(serial.equals("C1")){
-//                DatabaseConnection.iud("INSERT INTO customer(`name`,`contact`) VALUES (`"+un+"`,`"+contact+"')");
-//            }
-//            else if(serial.equals("D1")){
-//                DatabaseConnection.iud("INSERT INTO distributor(`name`,`contact`) VALUES (`"+un+"`,`"+contact+"')");
-//            }
-//            
-//        }
+        else{
+            DatabaseConnection.iud("INSERT INTO user(`username`,`full_name`,`contact_no`,`address`,`dob`,`serialKey`,`password`) VALUES ('"+un+"','"+fullN+"','"+contact+"','"+address+"','"+dob+"','"+serial+"','"+pass+"')");
+            JOptionPane.showMessageDialog(this,"New User Regidtered Successfully","DONE",JOptionPane.INFORMATION_MESSAGE);
+            
+            //in here assigned C1 as the customer serial key and assigned D1 as the distributor serial key
+            if(serial.equals("C1")){
+                DatabaseConnection.iud("INSERT INTO customer(`name`,`contact`) VALUES ('"+un+"','"+contact+"')");
+            }
+            else if(serial.equals("D1")){
+                DatabaseConnection.iud("INSERT INTO distributor(`name`,`contact`) VALUES ('"+un+"','"+contact+"')");
+            }
+            this.dispose();
+            Login lg = new Login();
+            lg.setVisible(true);
+        }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -390,6 +393,9 @@ public class Register extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        Login login = new Login();
+        login.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField2ActionPerformed
