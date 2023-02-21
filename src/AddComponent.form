@@ -115,10 +115,8 @@
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel4" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboBox1" alignment="3" max="32767" attributes="0"/>
-                          <Component id="jButton4" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jButton4" min="-2" pref="46" max="-2" attributes="0"/>
+                      <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -228,9 +226,12 @@
               <Font name="Segoe UI Emoji" size="18" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
+              <StringArray count="5">
                 <StringItem index="0" value="CUSTOMER"/>
-                <StringItem index="1" value="ETC"/>
+                <StringItem index="1" value="DISTRIBUTOR"/>
+                <StringItem index="2" value="BRAND"/>
+                <StringItem index="3" value="MODEL "/>
+                <StringItem index="4" value="BANK ACCOUNT"/>
               </StringArray>
             </Property>
           </Properties>

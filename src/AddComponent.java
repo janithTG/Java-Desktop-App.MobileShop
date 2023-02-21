@@ -1,3 +1,10 @@
+
+
+import java.sql.ResultSet;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -99,7 +106,7 @@ public class AddComponent extends javax.swing.JFrame {
         });
 
         jComboBox1.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CUSTOMER", "ETC" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CUSTOMER", "DISTRIBUTOR", "BRAND", "MODEL ", "BANK ACCOUNT" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -195,9 +202,8 @@ public class AddComponent extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -272,6 +278,103 @@ public class AddComponent extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        String category = String.valueOf(jComboBox1.getSelectedItem());
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        try {
+            if(category.equals("CUSTOMER")){
+                DatabaseConnection.iud("INSERT INTO customer (`name`,`contact`) VALUES ('"+jTextField1.getText()+"','"+jTextField2.getText()+"')");
+                JOptionPane.showMessageDialog(this,"New Customer Added Succesfully","DONE",JOptionPane.INFORMATION_MESSAGE);
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM customer");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id = rs.getString("id");
+                    String name = rs.getString("name");
+                    String contact = rs.getString("contact");
+                    Vector v = new Vector();
+                    v.add(id);
+                    v.add(name);
+                    v.add(contact);
+                    dtm.addRow(v);
+                    jTextField1.setText(null);
+                    jTextField2.setText(null);
+                }
+                
+            }
+            else if(category.equals("DISTRIBUTOR")){
+                DatabaseConnection.iud("INSERT INTO distributor (`name`,`contact`) VALUES ('"+jTextField1.getText()+"','"+jTextField2.getText()+"')");
+                JOptionPane.showMessageDialog(this,"New Distributor Added Succesfully","DONE",JOptionPane.INFORMATION_MESSAGE);
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM distributor");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id = rs.getString("id");
+                    String name = rs.getString("name");
+                    String contact = rs.getString("contact");
+                    Vector v = new Vector();
+                    v.add(id);
+                    v.add(name);
+                    v.add(contact);
+                    dtm.addRow(v);
+                    jTextField1.setText(null);
+                    jTextField2.setText(null);
+                }
+            }
+            else if(category.equals("BRAND")){
+                DatabaseConnection.iud("INSERT INTO brand (`name`) VALUES ('"+jTextField1.getText()+"')");
+                JOptionPane.showMessageDialog(this,"New Brand Added Succesfully","DONE",JOptionPane.INFORMATION_MESSAGE);
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM brand");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id = rs.getString("id");
+                    String name = rs.getString("name");
+                    Vector v = new Vector();
+                    v.add(id);
+                    v.add(name);
+                    dtm.addRow(v);
+                    jTextField1.setText(null);
+                    jTextField2.setText(null);
+                }
+            }
+            else if(category.equals("MODEL")){
+                DatabaseConnection.iud("INSERT INTO model (`name`) VALUES ('"+jTextField1.getText()+"')");
+                JOptionPane.showMessageDialog(this,"New Model Added Succesfully","DONE",JOptionPane.INFORMATION_MESSAGE);
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM model");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id = rs.getString("id");
+                    String name = rs.getString("name");
+                    Vector v = new Vector();
+                    v.add(id);
+                    v.add(name);
+                    dtm.addRow(v);
+                    jTextField1.setText(null);
+                    jTextField2.setText(null);
+                }
+            }
+            else if(category.equals("BANK ACCOUNT")){
+                DatabaseConnection.iud("INSERT INTO bank (`name`,`account`) VALUES ('"+jTextField1.getText()+"','"+jTextField2.getText()+"')");
+                JOptionPane.showMessageDialog(this,"New Bank Details Added Succesfully","DONE",JOptionPane.INFORMATION_MESSAGE);
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM bank");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id = rs.getString("id");
+                    String name = rs.getString("name");
+                    String contact = rs.getString("account");
+                    Vector v = new Vector();
+                    v.add(id);
+                    v.add(name);
+                    v.add(contact);
+                    dtm.addRow(v);
+                    jTextField1.setText(null);
+                    jTextField2.setText(null);
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"Please Select Category","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
