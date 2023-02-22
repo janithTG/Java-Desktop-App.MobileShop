@@ -247,8 +247,10 @@ public class AddComponent extends javax.swing.JFrame {
         // TODO add your handling code here:
         AddComponent add = new AddComponent();
         CashierMenu c1 = new CashierMenu();
+        AddBanking b = new AddBanking();
         this.setVisible(false);
-        c1.show();
+        b.setVisible(true);
+//        c1.show();
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
