@@ -106,7 +106,7 @@ public class AddComponent extends javax.swing.JFrame {
         });
 
         jComboBox1.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CUSTOMER", "DISTRIBUTOR", "BRAND", "MODEL ", "BANK ACCOUNT" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CUSTOMER", "DISTRIBUTOR", "BRAND", "MODEL", "BANK ACCOUNT" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -262,6 +262,92 @@ public class AddComponent extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+        String category = jComboBox1.getSelectedItem().toString();
+         DefaultTableModel dtm = (DefaultTableModel)jTable1.getModel();
+         try {
+           if(category.equals("CUSTOMER")){
+             ResultSet rs = DatabaseConnection.search("SELECT * FROM customer");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id_new = rs.getString("id");
+                    String name = rs.getString("name");
+                    String contact = rs.getString("contact");
+                    Vector v = new Vector();
+                    v.add(id_new);
+                    v.add(name);
+                    v.add(contact);
+                    dtm.addRow(v);
+//                    jTextField1.setText(null);
+//                    jTextField2.setText(null);
+                }
+           }
+                else if(category.equals("DISTRIBUTOR")){
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM distributor");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id = rs.getString("id");
+                    String name = rs.getString("name");
+                    String contact = rs.getString("contact");
+                    Vector v = new Vector();
+                    v.add(id);
+                    v.add(name);
+                    v.add(contact);
+                    dtm.addRow(v);
+                    
+                }
+            }
+            else if(category.equals("BRAND")){
+               
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM brand");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id = rs.getString("id");
+                    String name = rs.getString("name");
+                    Vector v = new Vector();
+                    v.add(id);
+                    v.add(name);
+                    dtm.addRow(v);
+                   
+                }
+            }
+            
+            else if(category.equals("MODEL")){
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM model");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id = rs.getString("id");
+                    String name = rs.getString("name");
+                    Vector v = new Vector();
+                    v.add(id);
+                    v.add(name);
+                    dtm.addRow(v);
+                }
+            }
+            
+            else if(category.equals("BANK ACCOUNT")){
+                
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM bank");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id = rs.getString("id");
+                    String name = rs.getString("name");
+                    String contact = rs.getString("account");
+                    Vector v = new Vector();
+                    v.add(id);
+                    v.add(name);
+                    v.add(contact);
+                    dtm.addRow(v);
+                    
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"Please Select Category","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+          
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+         
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -270,10 +356,150 @@ public class AddComponent extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        String category = String.valueOf(jComboBox1.getSelectedItem());
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        try {
+            int row = jTable1.getSelectedRow();
+            String id = String.valueOf(jTable1.getValueAt(row, 0));
+            String value = String.valueOf(jTable1.getValueAt(row, 1));
+            String no = String.valueOf(jTable1.getValueAt(row, 2));
+            if(category.equals("CUSTOMER")){
+                DatabaseConnection.iud("UPDATE customer SET `name` = '"+value+"' WHERE `id`='"+id+"' ");
+                DatabaseConnection.iud("UPDATE customer SET `contact` = '"+no+"'WHERE `id`='"+id+"' ");
+                JOptionPane.showMessageDialog(this,"Customer Updated Successfully","DONE",JOptionPane.INFORMATION_MESSAGE);
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM customer");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id_new = rs.getString("id");
+                    String name = rs.getString("name");
+                    String contact = rs.getString("contact");
+                    Vector v = new Vector();
+                    v.add(id_new);
+                    v.add(name);
+                    v.add(contact);
+                    dtm.addRow(v);
+                    jTextField1.setText(null);
+                    jTextField2.setText(null);
+                }
+            }
+            else if(category.equals("DISTRIBUTOR")){
+                DatabaseConnection.iud("UPDATE distributor SET `name` = '"+value+"' WHERE `id`='"+id+"' ");
+                DatabaseConnection.iud("UPDATE distributor SET `contact` = '"+no+"'WHERE `id`='"+id+"' ");
+                JOptionPane.showMessageDialog(this,"Distributor Updated Successfully","DONE",JOptionPane.INFORMATION_MESSAGE);
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM distributor");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id_new = rs.getString("id");
+                    String name = rs.getString("name");
+                    String contact = rs.getString("contact");
+                    Vector v = new Vector();
+                    v.add(id_new);
+                    v.add(name);
+                    v.add(contact);
+                    dtm.addRow(v);
+                    jTextField1.setText(null);
+                    jTextField2.setText(null);
+                }
+            }
+            else if(category.equals("BRAND")){
+                DatabaseConnection.iud("UPDATE brand SET `name` = '"+value+"' WHERE `id`='"+id+"' ");
+//                DatabaseConnection.iud("UPDATE customer SET `contact` = '"+no+"'WHERE `id`='"+id+"' ");
+                JOptionPane.showMessageDialog(this,"Brand Details Updated Successfully","DONE",JOptionPane.INFORMATION_MESSAGE);
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM brand");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id_new = rs.getString("id");
+                    String name = rs.getString("name");
+//                    String contact = rs.getString("contact");
+                    Vector v = new Vector();
+                    v.add(id_new);
+                    v.add(name);
+                    dtm.addRow(v);
+                    jTextField1.setText(null);
+                    jTextField2.setText(null);
+                }
+            }
+            else if(category.equals("MODEL")){
+                DatabaseConnection.iud("UPDATE model SET `name` = '"+value+"' WHERE `id`='"+id+"' ");
+                
+                JOptionPane.showMessageDialog(this,"Model Details Updated Successfully","DONE",JOptionPane.INFORMATION_MESSAGE);
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM model");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id_new = rs.getString("id");
+                    String name = rs.getString("name");
+                    
+                    Vector v = new Vector();
+                    v.add(id_new);
+                    v.add(name);
+                   
+                    dtm.addRow(v);
+                    jTextField1.setText(null);
+                    jTextField2.setText(null);
+                }
+            }
+            else if(category.equals("BANK ACCOUNT")){
+                DatabaseConnection.iud("UPDATE bank SET `name` = '"+value+"' WHERE `id`='"+id+"' ");
+                DatabaseConnection.iud("UPDATE bank SET `account` = '"+no+"'WHERE `id`='"+id+"' ");
+                JOptionPane.showMessageDialog(this,"Bank Details Updated Successfully","DONE",JOptionPane.INFORMATION_MESSAGE);
+                ResultSet rs = DatabaseConnection.search("SELECT * FROM bank");
+                dtm.setRowCount(0);
+                while(rs.next()){
+                    String id_new = rs.getString("id");
+                    String name = rs.getString("name");
+                    String contact = rs.getString("account");
+                    Vector v = new Vector();
+                    v.add(id_new);
+                    v.add(name);
+                    v.add(contact);
+                    dtm.addRow(v);
+                    jTextField1.setText(null);
+                    jTextField2.setText(null);
+                }
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        String category = jComboBox1.getSelectedItem().toString();
+        DefaultTableModel dtm =(DefaultTableModel) jTable1.getModel();
+        try {
+            int row = jTable1.getSelectedRow();
+            String id = jTable1.getValueAt(row, 0).toString();
+            if(category.equals("CUSTOMER")){
+                DatabaseConnection.iud("DELETE FROM customer WHERE `id` = '"+id+"' ");
+                dtm.removeRow(row);
+                JOptionPane.showMessageDialog(this,"Customer Removed Successfully","Done",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if(category.equals("DISTRIBUTOR")){
+                DatabaseConnection.iud("DELETE FROM distributor WHERE `id` = '"+id+"' ");
+                dtm.removeRow(row);
+                JOptionPane.showMessageDialog(this,"Distributor Removed Successfully","Done",JOptionPane.INFORMATION_MESSAGE);
+            }
+            if(category.equals("BRAND")){
+                DatabaseConnection.iud("DELETE FROM brand WHERE `id` = '"+id+"' ");
+                dtm.removeRow(row);
+                JOptionPane.showMessageDialog(this,"Brand Details Removed Successfully","Done",JOptionPane.INFORMATION_MESSAGE);
+            }
+            if(category.equals("MODEL")){
+                DatabaseConnection.iud("DELETE FROM model WHERE `id` = '"+id+"' ");
+                dtm.removeRow(row);
+                JOptionPane.showMessageDialog(this,"Model DEtails Removed Successfully","Done",JOptionPane.INFORMATION_MESSAGE);
+            }
+            if(category.equals("BANK ACCOUNT")){
+                DatabaseConnection.iud("DELETE FROM bank WHERE `id` = '"+id+"' ");
+                dtm.removeRow(row);
+                JOptionPane.showMessageDialog(this,"Bank Details Removed Successfully","Done",JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+       
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

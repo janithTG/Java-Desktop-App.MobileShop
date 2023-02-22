@@ -166,7 +166,6 @@
               <Font name="Segoe UI Emoji" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ADD PURCHASE"/>
-            <Property name="actionCommand" type="java.lang.String" value="ADD PURCHASE"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>

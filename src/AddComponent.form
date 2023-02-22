@@ -230,7 +230,7 @@
                 <StringItem index="0" value="CUSTOMER"/>
                 <StringItem index="1" value="DISTRIBUTOR"/>
                 <StringItem index="2" value="BRAND"/>
-                <StringItem index="3" value="MODEL "/>
+                <StringItem index="3" value="MODEL"/>
                 <StringItem index="4" value="BANK ACCOUNT"/>
               </StringArray>
             </Property>
